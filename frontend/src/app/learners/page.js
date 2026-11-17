@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const API_URL = "http://https://learning-tracker-backend-91xm.onrender.com/api/v1";
+const API_URL = "https://learning-tracker-backend-91xm.onrender.com/api/v1";
 
 const navigation = [
   { label: "Overview", href: "/", icon: "⌂" },

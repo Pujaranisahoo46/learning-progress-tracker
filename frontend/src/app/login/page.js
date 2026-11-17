@@ -20,7 +20,7 @@ export default function LoginPage() {
 
     try {
       const response = await fetch(
-        "http://https://learning-tracker-backend-91xm.onrender.com/api/v1/auth/login",
+        "https://learning-tracker-backend-91xm.onrender.com/api/v1/auth/login",
         {
           method: "POST",
           credentials: "include",
@@ -44,7 +44,7 @@ export default function LoginPage() {
 
       if (data.role !== role) {
         await fetch(
-          "http://https://learning-tracker-backend-91xm.onrender.com/api/v1/auth/logout",
+          "https://learning-tracker-backend-91xm.onrender.com/api/v1/auth/logout",
           {
             method: "POST",
             credentials: "include",
