@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const API_URL = "http://localhost:8081/api/v1";
+const API_URL = "http://https://learning-tracker-backend-91xm.onrender.com/api/v1";
 
 export default function Home() {
   const router = useRouter();

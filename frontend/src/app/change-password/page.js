@@ -36,7 +36,7 @@ export default function ChangePasswordPage() {
 
     try {
       const response = await fetch(
-        "http://localhost:8081/api/v1/auth/change-password",
+        "http://https://learning-tracker-backend-91xm.onrender.com/api/v1/auth/change-password",
         {
           method: "POST",
           credentials: "include",

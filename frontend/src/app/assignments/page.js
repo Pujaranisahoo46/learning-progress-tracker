@@ -4,7 +4,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
-const API_URL = "http://localhost:8081/api/v1";
+const API_URL = "http://https://learning-tracker-backend-91xm.onrender.com/api/v1";
 
 const navigation = [
   { label: "Overview", href: "/", icon: "⌂" },
