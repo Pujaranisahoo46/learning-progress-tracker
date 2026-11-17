@@ -1,0 +1,25 @@
+
+# Java and Maven
+**/target/
+*.class
+
+# IntelliJ
+**/.idea/
+*.iml
+
+# Node.js and Next.js
+**/node_modules/
+**/.next/
+**/out/
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+
+# Logs and operating system files
+*.log
+.DS_Store
+Thumbs.db
+# VS Code settings
+.vscode/
