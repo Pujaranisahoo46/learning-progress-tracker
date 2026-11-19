@@ -286,35 +286,7 @@ async function resetCandidatePassword(learner) {
     }
   }
 
-  async function updateStatus(assignmentId, status) {
-    setMessage("");
-
-    try {
-      const response = await fetch(
-        `${API_URL}/assignments/${assignmentId}/status`,
-        {
-          method: "PATCH",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ status }),
-        }
-      );
-
-      const data = await readResponse(response);
-
-      setAssignments((previous) =>
-        previous.map((item) =>
-          item.id === assignmentId ? data : item
-        )
-      );
-
-      showMessage("Progress updated successfully.");
-    } catch (error) {
-      showMessage(error.message, "error");
-    }
-  }
+ 
 
   async function logout() {
     try {
@@ -888,27 +860,7 @@ async function resetCandidatePassword(learner) {
                         </span>
                       </div>
 
-                      <div>
-                        <label
-                          htmlFor={`status-${item.id}`}
-                          className="mb-2 block text-xs font-semibold text-slate-500"
-                        >
-                          Update status
-                        </label>
-
-                        <select
-                          id={`status-${item.id}`}
-                          value={item.status || "NOT_STARTED"}
-                          onChange={(e) =>
-                            updateStatus(item.id, e.target.value)
-                          }
-                          className="rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm"
-                        >
-                          <option value="NOT_STARTED">Not Started</option>
-                          <option value="IN_PROGRESS">In Progress</option>
-                          <option value="COMPLETED">Completed</option>
-                        </select>
-                      </div>
+                      
                     </div>
                   ))}
                 </div>

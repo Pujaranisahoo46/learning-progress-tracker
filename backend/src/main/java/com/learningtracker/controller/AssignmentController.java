@@ -163,12 +163,22 @@ public class AssignmentController {
         return ResponseEntity.ok(result);
     }
 
-    // Admin or the owner Student: Update assignment status
+   
+    // Only the owner Student can update assignment status
     @PatchMapping("/{id}/status")
     public ResponseEntity<?> updateStatus(
             @PathVariable Long id,
             @RequestBody Map<String, String> request,
             Authentication authentication) {
+
+        // Coordinator/Admin can view progress but cannot update it
+        if (isCoordinator(authentication)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(Map.of(
+                            "message",
+                            "Coordinator can view progress but cannot update student status"
+                    ));
+        }
 
         var assignmentOptional = assignmentRepository.findById(id);
 
@@ -179,16 +189,21 @@ public class AssignmentController {
 
         Assignment assignment = assignmentOptional.get();
 
-        if (!isCoordinator(authentication)
-                && !ownsAssignment(assignment, authentication)) {
-
+        if (!ownsAssignment(assignment, authentication)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(Map.of("message", "You cannot update another student's assignment"));
+                    .body(Map.of(
+                            "message",
+                            "You cannot update another student's assignment"
+                    ));
         }
 
         String status = request.get("status");
 
         try {
+            if (status == null) {
+                throw new IllegalArgumentException();
+            }
+
             Assignment.Status newStatus =
                     Assignment.Status.valueOf(status);
 
@@ -198,10 +213,13 @@ public class AssignmentController {
 
             return ResponseEntity.ok(toResponse(saved));
 
-        } catch (Exception exception) {
+        } catch (IllegalArgumentException exception) {
             return ResponseEntity.badRequest()
-                    .body(Map.of("message",
-                            "Invalid status. Use NOT_STARTED, IN_PROGRESS or COMPLETED"));
+                    .body(Map.of(
+                            "message",
+                            "Invalid status. Use NOT_STARTED, IN_PROGRESS or COMPLETED"
+                    ));
         }
     }
+
 }
